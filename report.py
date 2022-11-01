@@ -42,14 +42,14 @@ class Store:
         with open(self.params['s'], 'r') as file:
             my_reader = csv.reader(file, delimiter=',')
             for row in my_reader:
-                self.sales.append((int(row[0]), int(row[1]), int(row[2]), int(row[3]), float(row[4])))
+                self.sales.append((int(row[1]), int(row[2]), int(row[3]), float(row[4])))
        
         # convert to dict for easy access
         self.teams = dict([(i,n) for i,n in self.teams])
         self.products = dict([(i,[n,p,l]) for i,n,p,l in self.products])
 
     def __build_reports(self):
-        for sid,pid,tid,q,d in self.sales:
+        for pid,tid,q,d in self.sales:
             # calculate revenue
             revenue = self.products[pid][1] * q * (1-(d/100.0))
             
